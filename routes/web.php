@@ -25,6 +25,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/request/{stage}', [App\Http\Controllers\DocumentFormController::class, 'index'])->name('DocumentFormController');
+Route::get('/home/request', [App\Http\Controllers\DocumentRequestController::class, 'index'])->middleware('auth');
 
-Route::get('/request', [App\Http\Controllers\DocumentFormController::class, 'index'])->name('DocumentFormController');
+Route::get('/home/request/personal_info/create', [App\Http\Controllers\PersonalInfoController::class, 'create'])->middleware('auth');
+
+Route::post('/home/request/personal_info', [App\Http\Controllers\PersonalInfoController::class, 'store'])->middleware('auth');
+

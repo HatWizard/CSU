@@ -2,6 +2,6 @@
 @section('content')
 
 <div class="container">
-    <a href="/request"> Подача документов </a>
+    <a href="/home/request/personal_info/create"> Подача документов </a>
 </div>
 @endsection
