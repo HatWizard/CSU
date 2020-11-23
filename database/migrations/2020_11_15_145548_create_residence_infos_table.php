@@ -15,6 +15,7 @@ class CreateResidenceInfosTable extends Migration
     {
         Schema::create('residence_infos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('request_id');
 
             $table->string('residence_index');
             $table->string('residence_region');
@@ -25,6 +26,7 @@ class CreateResidenceInfosTable extends Migration
             $table->string('residence_apartmentNumber');
             $table->string('citizenship');
 
+            $table->index('request_id');
             $table->timestamps();
         });
     }

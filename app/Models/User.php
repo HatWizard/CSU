@@ -43,6 +43,6 @@ class User extends Authenticatable
 
 
     public function DocumentRequest(){
-        $this->hasOne(\App\Models\DocumentRequest::class);
+        return $this->hasOne(\App\Models\DocumentRequest::class);
     }
 }

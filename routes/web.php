@@ -25,9 +25,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home/request', [App\Http\Controllers\DocumentRequestController::class, 'index'])->middleware('auth');
+Route::get('/home/request/create', [App\Http\Controllers\DocumentRequestController::class, 'create'])->middleware('auth');
 
-Route::get('/home/request/personal_info/create', [App\Http\Controllers\PersonalInfoController::class, 'create'])->middleware('auth');
+Route::get('/home/request/create/personal_info/create', [App\Http\Controllers\PersonalInfoController::class, 'create'])->middleware('auth');
 
-Route::post('/home/request/personal_info', [App\Http\Controllers\PersonalInfoController::class, 'store'])->middleware('auth');
+Route::post('/home/request/create/personal_info', [App\Http\Controllers\PersonalInfoController::class, 'store'])->middleware('auth');
 
+Route::get('/home/request/create/residence_info/create', [App\Http\Controllers\ResidenceInfoController::class, 'create'])->middleware('auth');
+
+Route::post('/home/request/create/residence_info', [App\Http\Controllers\ResidenceInfoController::class, 'store'])->middleware('auth');
+
+Route::get('/home/request/create/documentValid_info/create', [App\Http\Controllers\DocumentValidInfoController::class, 'create'])->middleware('auth');
+
+Route::post('/home/request/create/documentValid_info', [App\Http\Controllers\DocumentValidInfoController::class, 'store'])->middleware('auth');

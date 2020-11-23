@@ -16,8 +16,17 @@ class CreateDocumentValidInfosTable extends Migration
         Schema::create('document_valid_infos', function (Blueprint $table) {
             $table->id();
             
-            $table->string("validDoc_document_type");
+            $table->enum("validDoc_document_type", 
+            [
+                'Временное удостоверение личности',
+                'Загранпаспорт других стран',
+                'Загранпаспорт РФ',
+                'Паспорт инстранного гражданина',
+                'Паспорт РФ',
+                'Удостоверение личности другой страны'
+            ]);
             $table->string("validDoc_serial");
+            $table->date("validDoc_date");
             $table->string("validDoc_number");
             $table->string("validDoc_subdivision_code");
             $table->string("validDoc_photosPath");

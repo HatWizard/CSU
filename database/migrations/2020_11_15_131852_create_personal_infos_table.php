@@ -18,7 +18,7 @@ class CreatePersonalInfosTable extends Migration
             $table->unsignedBigInteger('request_id');
 
             $table->enum('univercity_subdivision', ['Челябинск', 'Миас', 'Троицк']);
-            $table->enum('education_level', ['Колледж', 'Бакалавриат/Специалитет', 'Аспирантура']);
+            $table->enum('future_education_level', ['Колледж', 'Бакалавриат/Специалитет', 'Аспирантура']);
             $table->string("surname");
             $table->string("name");
             $table->string("patronymic")->nullable();

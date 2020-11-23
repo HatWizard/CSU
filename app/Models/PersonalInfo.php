@@ -9,7 +9,10 @@ class PersonalInfo extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','surname', 'phone_number', 'response_email', 'birthdate', 'future_education_level', 
+    'univercity_subdivision', 'birthplace', 'gender'];
+
     public function request(){
-        $this->belongsTo(DocumentRequest::class);
+        return $this->belongsTo(DocumentRequest::class);
     }
 }

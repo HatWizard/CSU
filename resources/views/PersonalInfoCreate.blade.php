@@ -4,13 +4,13 @@
 <div class="container">
     <div class="card slide-in-right" id="page1">
         <div class="card-body">
-            <form method="POST" action="/home/request/personal_info" enctype="multipart/form-data">
+            <form method="POST" action="/home/request/create/personal_info" enctype="multipart/form-data" id="p_info">
             @csrf
             <h5 class="card-title">Информация о поступлении</h5>     
             <div>
                 <p class="card-text">Выберите подразделение:</p>
                     <div>
-                        <select class="browser-default custom-select selectionButton" id="subunit_P1">
+                        <select class="browser-default custom-select selectionButton" id="univercity_subdivision" name="univercity_subdivision" required>
                             <option disabled selected></option>
                             <option value="1">ЧелГУ</option>
                             <option value="2">Миас</option>
@@ -18,16 +18,28 @@
                         </select>
                     </div>
             </div>
-            <div>
-                <p class="card-text">Выберите уровень образования, на который хотите поступать:</p>
-                <select class="browser-default custom-select selectionButton" id="education_level_P1">
-                    <option disabled selected><p class="white-text"></p></option>
-                    <option value="1">Колледж</option>
-                    <option value="2">Бакалавриат/Специалитет</option>
-                    <option value="3">Магистратура</option>
-                    <option value="4">Аспирантура</option>
-                </select>
+
+
+            
+            <div class="form-group row">
+                <label for="future_education_level" class="col-md-4 col-form-label text-md-right">Имя</label>
+                <div class="col-md-6">
+                    <select class="browser-default custom-select selectionButton" id="future_education_level" name= "future_education_level" required>
+                        <option disabled selected><p class="white-text"></p></option>
+                        <option value="1">Колледж</option>
+                        <option value="2">Бакалавриат/Специалитет</option>
+                        <option value="3">Магистратура</option>
+                        <option value="4">Аспирантура</option>
+                    </select>
+                    @error('future_education_level')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
+
+
 
             <br>
             <h5 class="card-title">Паспортные данные</h5>  
@@ -103,6 +115,36 @@
                     @enderror
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label for="birthplace" class="col-md-4 col-form-label text-md-right">Место рождения</label>
+                <div class="col-md-6">
+                    <input id="birthplace" 
+                           type="text" 
+                           class="form-control @error('birthdate') is-invalid @enderror" 
+                           name="birthplace" value="{{ old('birthplace') }}" 
+                           autocomplete="birthdate" 
+                           autofocus>
+                    @error('birthplace')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <br>
+            <div>
+                <p class="card-text">Пол:</p>
+                    <div>
+                        <select class="browser-default custom-select selectionButton" id="gender" name="gender" required>
+                            <option disabled selected></option>
+                            <option value="1">Мужчина</option>
+                            <option value="2">Женщина</option>
+                        </select>
+                    </div>
+            </div>
+
             <br>
             <h5 class="card-title">Данные связи</h5>  
 
@@ -141,7 +183,7 @@
             </div>
 
 
-            <button>Далее</button>
+            <button class="btn btn-primary">Далее</button>
         </div>
     </div>
     </form>
