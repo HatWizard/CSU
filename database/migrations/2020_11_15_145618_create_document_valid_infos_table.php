@@ -31,6 +31,7 @@ class CreateDocumentValidInfosTable extends Migration
             $table->string("validDoc_subdivision_code");
             $table->string("validDoc_photosPath");
 
+            $table->index('request_id');
             $table->timestamps();
         });
     }
