@@ -15,4 +15,6 @@ class PersonalInfo extends Model
     public function request(){
         return $this->belongsTo(DocumentRequest::class);
     }
+
+
 }

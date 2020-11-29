@@ -45,8 +45,24 @@
               </div>
             </div>
           </a>
-    
-    </div>
+        </div>
+        <br>
+        <div class="card-deck">
+          <a href={{ Request::url()."/education_info/create"}} class="custom-card">
+            <div class="card" style="width: 18rem; height:28rem; display: inline-block">
+              <img class="card-img-top" src="/img/mountain.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Образование</h5>
+                <p class="card-text">Информация о вашем образовании и подтверждающих его документов.</p>
+                    <?
+                    if($requestData->education_info_ID==null) echo "<p class=\"card-text\" style=\"color: orange\"> Вы еще не заполнили эту форму!</p>";
+                    else echo "<p class=\"card-text\" style=\"color:green\"> Ваши данные успешно сохранены!</p>";
+                    ?>
+              </div>
+            </div>
+          </a>
+        </div>
+
     
 </div>
 

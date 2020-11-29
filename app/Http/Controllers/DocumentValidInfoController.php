@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
+include(app_path()."\Library\FilesHandler.php");
+
 class DocumentValidInfoController extends Controller
 {
+
+    
+
     function create()
     {
         return view('DocumentValidInfo_Create');
@@ -16,6 +21,9 @@ class DocumentValidInfoController extends Controller
 
     function store()
     {
+
+ 
+
         
         $request = request()->validate([
             'validDoc_document_type'=>'required',
@@ -23,16 +31,19 @@ class DocumentValidInfoController extends Controller
             'validDoc_date'=>'required',
             'validDoc_number'=>'required',
             'validDoc_subdivision_code'=>'required',
-            'validDoc_photos'=>'required'
+            'validDoc_photos'=>'required',
+            'validDoc_photos.*'=>'mimes:jpeg,jpg,png|max:2048'
         ]);
         
         $documentRequest = auth()->user()->DocumentRequest;
         $docValID = $documentRequest->docValid_info_ID;
-        
+        $path = "private/UsersData/".auth()->user()->id."/".auth()->user()->DocumentRequest->id."/"."validation_docPhoto"."/";
+
+
         if($docValID==null)
         {   
             $docValidInfo = $this->fillObject($request);
-            $fileNames = $this->writeFiles($request['validDoc_photos']);         
+            $fileNames = WriteFiles($request['validDoc_photos'], $path);         
             $docValidInfo['validDoc_photosPath']=$fileNames;
             $docValidInfoObject = new DocumentValidInfo($docValidInfo);
             $docValidInfoObject->save();
@@ -42,34 +53,16 @@ class DocumentValidInfoController extends Controller
         else
         {
             $docValidInfoObject=DocumentValidInfo::find($docValID);
-            $this->clearFiles($docValidInfoObject->validDoc_photosPath);
+            DeleteFiles($docValidInfoObject->validDoc_photosPath, $path);
             $docValidInfo = $this->fillObject($request);
-            $docValidInfo['validDoc_photosPath'] = $this->writeFiles($request['validDoc_photos']);
+            $docValidInfo['validDoc_photosPath'] = WriteFiles($request['validDoc_photos'], $path);
             $docValidInfoObject->update($docValidInfo);
         }
         
         return redirect('home/request/create');
     }
 
-    function clearFiles($fileNames){
-        foreach($fileNames as $fileName){
-            $path = "private/docsPhoto/".auth()->user()->id."/";
-            Storage::delete($path.$fileName);
-        }
-    }
-
-    function writeFiles($files){
-        $fileNames=Array();
-        foreach($files as $file){
-            $filename = uniqid().".".$file->getClientOriginalExtension();
-            $path = "private/docsPhoto/".auth()->user()->id."/";
-            Storage::disk('local')->put($path.$filename,file_get_contents($file));
-            $fileNames[] = $filename;
-        }
-        return $fileNames;
-    }
-
-
+   
     function fillObject($request){
         $docValidInfo = Array();
         $docValidInfo['validDoc_document_type']=$request['validDoc_document_type'];

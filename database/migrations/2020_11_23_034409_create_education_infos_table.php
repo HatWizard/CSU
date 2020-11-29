@@ -25,7 +25,7 @@ class CreateEducationInfosTable extends Migration
                 'Среднее специальное'   
             ]
             );
-            $table->enum('education_document)type', 
+            $table->enum('education_document_type', 
                 [
                 'Аттестат', 
                 'Диплом бакалавра',

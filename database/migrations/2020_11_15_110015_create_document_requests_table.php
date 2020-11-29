@@ -19,7 +19,7 @@ class CreateDocumentRequestsTable extends Migration
             $table->unsignedBigInteger('personal_info_ID')->nullable();
             $table->unsignedBigInteger('residence_info_ID')->nullable();
             $table->unsignedBigInteger('docValid_info_ID')->nullable();
-
+            $table->unsignedBigInteger('education_info_ID')->nullable();
 
             $table->index('personal_info_ID');
             $table->index('residence_info_ID');

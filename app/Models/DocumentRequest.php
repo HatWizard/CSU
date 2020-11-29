@@ -25,10 +25,14 @@ class DocumentRequest extends Model
         $this->hasOne(DocumentValidInfo::class);
     }
 
+    public function EducationInfo(){
+        $this->hasOne(EducationInfo::class);
+    }
 
     protected $attributes = [
         'personal_info_ID' => null,
         'residence_info_ID' => null,
-        'docValid_info_ID' => null
+        'docValid_info_ID' => null,
+        'education_info_ID' => null
     ];
 }

@@ -38,3 +38,7 @@ Route::post('/home/request/create/residence_info', [App\Http\Controllers\Residen
 Route::get('/home/request/create/documentValid_info/create', [App\Http\Controllers\DocumentValidInfoController::class, 'create'])->middleware('auth');
 
 Route::post('/home/request/create/documentValid_info', [App\Http\Controllers\DocumentValidInfoController::class, 'store'])->middleware('auth');
+
+Route::get('/home/request/create/education_info/create', [App\Http\Controllers\EducationInfoController::class, 'create'])->middleware('auth');
+
+Route::post('/home/request/create/education_info', [App\Http\Controllers\EducationInfoController::class, 'store'])->middleware('auth');

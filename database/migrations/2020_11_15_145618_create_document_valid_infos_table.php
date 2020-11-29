@@ -15,6 +15,7 @@ class CreateDocumentValidInfosTable extends Migration
     {
         Schema::create('document_valid_infos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('request_id');
             
             $table->enum("validDoc_document_type", 
             [
