@@ -5,12 +5,9 @@
         <div class="card-header">Этап 3</div>
         <div class="card-body">
             <br>
-            <form method="POST" action="/home/request/create/documentValid_info" enctype="multipart/form-data" id="p_info">
+        <form method="POST" action="{{route('request', $request_id)}}/documentValid_info" enctype="multipart/form-data" id="p_info">
                 @csrf
-                <h5 class="card-title">Удостоверение личности</h5> 
-
-
-                
+                <h5 class="card-title">Удостоверение личности</h5>            
                 <div class="form-group row">
                     <label for="validDoc_document_type" class="col-md-4 col-form-label text-md-right">Тип документа</label>
                     <div class="col-md-6">

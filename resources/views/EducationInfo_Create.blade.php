@@ -2,9 +2,9 @@
 @section('requestPage')
 <div class="container">
     <div class="card slide-in-right" id="page2">
-        <div class="card-header">Этап 2</div>
+        <div class="card-header">Этап 4</div>
         <div class="card-body">
-            <form method="POST" action="/home/request/create/education_info" enctype="multipart/form-data" id="p_info">
+            <form method="POST" action="{{route('request', $request_id)}}/education_info" enctype="multipart/form-data" id="p_info">
                 @csrf
                 <div class="form-group row">
                     <label for="education_level" class="col-md-4 col-form-label text-md-right">Уровень образования</label>

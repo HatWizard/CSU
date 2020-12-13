@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\ResidenceInfo;
+use App\Models\DocumentRequest;
 use Illuminate\Http\Request;
 
 class ResidenceInfoController extends Controller
 {
-    function create()
+    function create($request_id)
     {
-        return view('ResidenceInfo_Create');
+        return view('ResidenceInfo_Create')->with("request_id", $request_id);;
     }
 
-    function store()
+    function store($request_id)
     {
+        $documentRequest=DocumentRequest::findAndValid($request_id);
+        if(is_null($documentRequest)) abort(404);
         
         $request = request()->validate([
             'residence_index'=>'required',
@@ -26,7 +29,6 @@ class ResidenceInfoController extends Controller
             'residence_apartmentNumber'=>'required',
             'citizenship'=>'required',
         ]); 
-        $documentRequest = auth()->user()->DocumentRequest;
         $residenceInfoID = $documentRequest->residence_info_ID;
         
         if($residenceInfoID==null)
@@ -43,6 +45,6 @@ class ResidenceInfoController extends Controller
         }
     
         
-        return redirect('home/request/create');
+        return redirect()->route('request', [$request_id]);
     }
 }

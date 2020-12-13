@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\EducationInfo;
+use App\Models\DocumentRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DocumentRequestController;
 
 include_once(app_path()."\Library\FilesHandler.php");
 
 class EducationInfoController extends Controller
 {
-    function create(){
-        return view('EducationInfo_Create');
+    function create($request_id)
+    {
+        return view('EducationInfo_Create')->with("request_id", $request_id);;
     }
 
-    function store()
+    function store($request_id)
     {
+        $documentRequest=DocumentRequest::findAndValid($request_id);
+        if(is_null($documentRequest)) abort(404);
+
         $request = request()->validate([
             'education_level'=>'required',
             'education_document_type'=>'required',
@@ -27,10 +33,9 @@ class EducationInfoController extends Controller
             'educationDoc_photo'=>'required',
             'educationDoc_photo.*'=>'mimes:jpeg,jpg,png|max:2048'
         ]);
-        
-        $documentRequest = auth()->user()->DocumentRequest;
+
         $educationInfoID = $documentRequest->education_info_ID;
-        $path = "private/UsersData/".auth()->user()->id."/".auth()->user()->DocumentRequest->id."/"."education_docPhotos"."/";
+        $path = "private/UsersData/".auth()->user()->id."/".$request_id."/"."education_docPhotos"."/";
         
         if($educationInfoID==null)
         {   
@@ -52,8 +57,8 @@ class EducationInfoController extends Controller
             $educationInfo_Object->update($educationInfo);
         }
         
-        return redirect('home/request/create');
-
+        return redirect()->route('request', [$request_id]);
+        
     }
 
        

@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\DocumentRequest;
 use App\Models\PersonalInfo;
+
 use Illuminate\Http\Request;
 
 class PersonalInfoController extends Controller
 {
-    function create()
+    function create($request_id)
     {
-        return view('PersonalInfoCreate');
+        return view('PersonalInfoCreate')->with("request_id", $request_id);;
     }
 
-    function store()
+    function store($request_id)
     {
+        $documentRequest=DocumentRequest::findAndValid($request_id);
+        if(is_null($documentRequest)) abort(404);
+
         $request = request()->validate([
             'name'=>'required',
             'surname'=>'required',
@@ -26,14 +30,13 @@ class PersonalInfoController extends Controller
             'birthplace'=>'required',
             'gender'=>'required',
         ]); 
-        $documentRequest = $personalInfoID = auth()->user()->DocumentRequest;
+
         $personalInfoID = $documentRequest->personal_info_ID;
-        
-        $personalInfo = new PersonalInfo($request);
-        $personalInfo->request_id=$documentRequest->id;
 
         if($personalInfoID==null)
-        {      
+        {   
+            $personalInfo = new PersonalInfo($request);
+            $personalInfo->request_id=$documentRequest->id;
             $personalInfo->save();
             $documentRequest->personal_info_ID=$personalInfo->id;
             $documentRequest->update();
@@ -44,7 +47,7 @@ class PersonalInfoController extends Controller
         }
     
         
-        return redirect('home/request/create');
+        return redirect()->route('request', [$request_id]);
         
     }
 

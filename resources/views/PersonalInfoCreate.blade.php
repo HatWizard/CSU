@@ -3,20 +3,28 @@
 
 <div class="container">
     <div class="card slide-in-right" id="page1">
+        <div class="card-header">Этап 1</div>
         <div class="card-body">
-            <form method="POST" action="/home/request/create/personal_info" enctype="multipart/form-data" id="p_info">
+            <form method="POST" action="{{route('request', $request_id)}}/personal_info" enctype="multipart/form-data" id="p_info">
             @csrf
-            <h5 class="card-title">Информация о поступлении</h5>     
-            <div>
-                <p class="card-text">Выберите подразделение:</p>
-                    <div>
-                        <select class="browser-default custom-select selectionButton" id="univercity_subdivision" name="univercity_subdivision" required>
-                            <option disabled selected></option>
-                            <option value="1">ЧелГУ</option>
-                            <option value="2">Миас</option>
-                            <option value="3">Троицк</option>
-                        </select>
-                    </div>
+            <h5 class="card-title">Информация о поступлении</h5> 
+
+            <div class="form-group row">
+                <label for="univercity_subdivision" class="col-md-4 col-form-label text-md-right">Выберите подразделение:</label>
+                <div class="col-md-6">
+                    <select class="browser-default custom-select selectionButton" id="univercity_subdivision" name= "univercity_subdivision" required>
+                        <option disabled selected><p class="white-text"></p></option>
+                        <option disabled selected></option>
+                        <option value="1">ЧелГУ</option>
+                        <option value="2">Миас</option>
+                        <option value="3">Троицк</option>
+                    </select>
+                    @error('univercity_subdivision')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
 
 
@@ -133,16 +141,22 @@
                 </div>
             </div>
 
-            <br>
-            <div>
-                <p class="card-text">Пол:</p>
-                    <div>
-                        <select class="browser-default custom-select selectionButton" id="gender" name="gender" required>
-                            <option disabled selected></option>
-                            <option value="1">Мужчина</option>
-                            <option value="2">Женщина</option>
-                        </select>
-                    </div>
+            
+            <div class="form-group row">
+                <label for="gender" class="col-md-4 col-form-label text-md-right">Пол:</label>
+                <div class="col-md-6">
+                    <select class="browser-default custom-select selectionButton" id="gender" name= "gender" required>
+                        <option disabled selected><p class="white-text"></p></option>
+                        <option disabled selected></option>
+                        <option value="1">Мужчина</option>
+                        <option value="2">Женщина</option>
+                    </select>
+                    @error('gender')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
 
             <br>

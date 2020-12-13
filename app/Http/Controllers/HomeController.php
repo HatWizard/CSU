@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $requests = auth()->user()->DocumentRequests->where("deleted", "=", false);
+        return view("home")->with("requests", $requests);
     }
 }

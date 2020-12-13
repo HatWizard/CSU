@@ -21,6 +21,10 @@ class CreateDocumentRequestsTable extends Migration
             $table->unsignedBigInteger('docValid_info_ID')->nullable();
             $table->unsignedBigInteger('education_info_ID')->nullable();
 
+            $table->integer('record_state');
+            
+            $table->boolean("deleted");
+
             $table->index('personal_info_ID');
             $table->index('residence_info_ID');
             $table->index('docValid_info_ID');

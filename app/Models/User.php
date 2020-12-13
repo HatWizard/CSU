@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
 
-    public function DocumentRequest(){
-        return $this->hasOne(\App\Models\DocumentRequest::class);
+    public function DocumentRequests(){
+        return $this->hasMany(\App\Models\DocumentRequest::class);
     }
 }

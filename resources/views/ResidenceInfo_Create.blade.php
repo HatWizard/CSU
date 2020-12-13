@@ -3,9 +3,9 @@
 <div class="container">
 
     <div class="card slide-in-right" id="page2">
-        <div class="card-header">Этап 3</div>
+        <div class="card-header">Этап 2</div>
         <div class="card-body">
-            <form method="POST" action="/home/request/create/residence_info" enctype="multipart/form-data" id="r_info">
+            <form method="POST" action="{{route('request', $request_id)}}/residence_info" enctype="multipart/form-data" id="r_info">
                 @csrf
                 <br>
                 <h5 class="card-title">Место регистрации</h5>  
